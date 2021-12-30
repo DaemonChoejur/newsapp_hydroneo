@@ -8,4 +8,12 @@ class Source {
     required this.url,
     required this.favicon,
   });
+
+  static Source fromJson(Map<String, dynamic> json) {
+    return Source(
+      title: json['title'],
+      url: json['url'],
+      favicon: json['favicon'],
+    );
+  }
 }

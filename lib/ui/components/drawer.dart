@@ -16,6 +16,7 @@ class _NavDrawerState extends State<NavDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    // we need to know if the current mode is darkmode or not so we can set the value of the cupertino switch accurately.
     var theme = Provider.of<ThemeNotifier>(context).isDarkMode;
 
     if (theme) {
@@ -34,7 +35,7 @@ class _NavDrawerState extends State<NavDrawer> {
           child: Align(
             alignment: Alignment.topLeft,
             child: Text(
-              'Hi Stranger,',
+              'Hi Siri,',
               style: TextStyle(color: Colors.black, fontSize: 25),
             ),
           ),

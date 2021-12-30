@@ -7,3 +7,14 @@ const kLight = 'light';
 Widget customSpacerWidget(BuildContext context) {
   return SizedBox(height: MediaQuery.of(context).size.height * 0.03 + 10);
 }
+
+enum TOPICS {
+  world,
+  nation,
+  business,
+  technology,
+  entertainment,
+  science,
+  sports,
+  health
+}
