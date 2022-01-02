@@ -1,43 +1,57 @@
-import 'package:news_app_hydroneo/models/source.dart';
+/*
+ {
+  "published_date": "2022-01-01T05:26:47+00:00",
+  "title": "Pictures of the world ushering in 2022, as omicron weighs on New Year celebrations - CNBC",
+  "link": "https://www.cnbc.com/2022/01/01/photos-of-the-world-welcoming-2022-as-omicron-weighs-on-celebrations.html",
+  "source": {
+      "title": "CNBC",
+      "url": "https://www.cnbc.com"
+    }
+  },
+*/
 
-class ArticlesList {
-  final List<Article> articlesList;
+import 'package:hive/hive.dart';
 
-  ArticlesList({required this.articlesList});
+part 'article.g.dart';
 
-  factory ArticlesList.fromJson(List<dynamic> parsedJson) {
-    List<Article> articles = [];
-
-    articles = parsedJson.map((i) => Article.fromJson(i)).toList();
-
-    return ArticlesList(articlesList: articles);
-  }
-}
-
-class Article {
-  Source source;
+@HiveType(typeId: 1)
+class Article extends HiveObject {
+  // Source source;
+  @HiveField(0)
   String link;
+  @HiveField(1)
   String publishedDate;
-  String description;
+  @HiveField(2)
+  String? description;
+  @HiveField(3)
   String title;
-  String thumbnail;
+  @HiveField(4)
+  String? thumbnail;
 
   Article({
-    required this.source,
+    // required this.source,
     required this.link,
     required this.publishedDate,
-    required this.description,
+    this.description,
     required this.title,
-    required this.thumbnail,
+    this.thumbnail,
   });
 
   static Article fromJson(Map<String, dynamic> json) {
+    String description = '';
+    String thumbnail = '';
+    if (json['description'] != null) description = json['description'];
+    if (json['thumbnail'] != null) {
+      thumbnail = json['thumbnail'];
+    }
+
     return Article(
-        source: json['source'],
-        link: json['link'],
-        publishedDate: json['published_date'],
-        description: json['description'],
-        title: json['title'],
-        thumbnail: json['thumbnail']);
+      // source: json['source'],
+      link: json['link'],
+      publishedDate: json['published_date'],
+      title: json['title'],
+      description: description,
+      thumbnail: thumbnail,
+    );
   }
 }

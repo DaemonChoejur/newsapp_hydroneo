@@ -1,12 +1,12 @@
 import 'package:news_app_hydroneo/api/news_api.dart';
-import 'package:news_app_hydroneo/models/article.dart';
+import 'package:news_app_hydroneo/models/article_list.dart';
 
 class NewsRepository {
   NewsApiClient newsApiClient;
 
   NewsRepository({required this.newsApiClient});
 
-  Future<ArticlesList> fetchNews({required String topic}) {
-    return newsApiClient.fetchNews(topic: topic);
+  Future<ArticlesList> fetchNews({required String topic, required int limit}) {
+    return newsApiClient.fetchNews(topic: topic, limit: limit);
   }
 }

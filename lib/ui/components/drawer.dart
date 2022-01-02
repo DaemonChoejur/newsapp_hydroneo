@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:news_app_hydroneo/common/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +19,9 @@ class _NavDrawerState extends State<NavDrawer> {
 
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('EEEE\nMMMM d').format(now);
+
     // we need to know if the current mode is darkmode or not so we can set the value of the cupertino switch accurately.
     var theme = Provider.of<ThemeNotifier>(context).isDarkMode;
 
@@ -32,29 +38,43 @@ class _NavDrawerState extends State<NavDrawer> {
         child: Column(
       children: [
         const DrawerHeader(
-          child: Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              'Hi Siri,',
-              style: TextStyle(color: Colors.black, fontSize: 25),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/newsbg.jpg'),
+              fit: BoxFit.cover,
             ),
           ),
-          // decoration: BoxDecoration(
-          //     color: Colors.green,
-          //     image: DecorationImage(
-          //         fit: BoxFit.fill,
-          //         image: AssetImage('assets/images/cover.jpg'))),
+          child: Center(
+            child: Text(
+              'Paper News',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.w500,
+                shadows: [
+                  Shadow(
+                    blurRadius: 20.0,
+                    offset: Offset(0.0, 6.0),
+                  )
+                ],
+                color: Colors.white,
+              ),
+            ),
+          ),
         ),
         ListTile(
-          // leading: const Icon(Icons.input),
-          title: const Text('API calls remaining'),
-          trailing: const Text('20'),
-          onTap: () => {},
+          title: Text(
+            formattedDate.toString(),
+            style: const TextStyle(
+              fontSize: 18,
+            ),
+          ),
         ),
-        const Divider(),
         ListTile(
-          // leading: const Icon(Icons.input),
-          title: const Text('Theme Mode'),
+          title: const Text(
+            'Theme Mode',
+            textScaleFactor: 1.07,
+          ),
+          // change icon based on value of _isDarkMode
           trailing: _isDarkMode
               ? const Icon(Icons.dark_mode_rounded)
               : const Icon(Icons.light_mode_rounded),
@@ -66,6 +86,7 @@ class _NavDrawerState extends State<NavDrawer> {
             trackColor: Theme.of(context).iconTheme.color,
             // thumbColor: Colors.red,
             onChanged: (val) {
+              // change value of _isDarkMode which i used in UI
               setState(() {
                 _isDarkMode = val;
               });
@@ -79,6 +100,52 @@ class _NavDrawerState extends State<NavDrawer> {
               }
             }),
         const Divider(),
+        ListTile(
+          // leading: const Icon(Icons.input),
+          title: const Text(
+            'Favourites',
+            textScaleFactor: 1.07,
+          ),
+          subtitle: const Text('Your favourite news list.'),
+          trailing: const Text(
+            '20',
+            textScaleFactor: 1.07,
+          ),
+          onTap: () => {},
+        ),
+        const Divider(),
+        const ListTile(
+          // leading: const Icon(Icons.input),
+          title: Text(
+            'Api calls remaining',
+            textScaleFactor: 1.07,
+          ),
+          // subtitle:  Text(''),
+          trailing: Text(
+            '20',
+            textScaleFactor: 1.07,
+          ),
+        ),
+        Center(
+            child: Column(
+          children: [
+            Text(
+              'Rate Limit: 5 requests/min',
+              style: TextStyle(
+                fontSize: 15,
+                color: Theme.of(context).errorColor,
+              ),
+            ),
+            Text(
+              'Hard Limit: 10 requests/day',
+              style: TextStyle(
+                fontSize: 15,
+                color: Theme.of(context).errorColor,
+              ),
+            ),
+          ],
+        )),
+        const Divider(),
         Expanded(
           child: Align(
             alignment: Alignment.bottomCenter,
@@ -87,12 +154,13 @@ class _NavDrawerState extends State<NavDrawer> {
               child: RichText(
                 textScaleFactor: 1.1,
                 text: TextSpan(
-                  text: '2021 ',
+                  text: now.year.toString(),
                   style: DefaultTextStyle.of(context).style,
                   children: <TextSpan>[
                     const TextSpan(
-                        text: '\u00a9',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                      text: ' \u00a9',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     TextSpan(
                       text: ' AlphaNapster.',
                       style: TextStyle(

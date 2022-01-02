@@ -1,12 +1,13 @@
+// We dont really need this data class for now
 class Source {
   String title;
   String url;
-  String favicon;
+  String? favicon;
 
   Source({
     required this.title,
     required this.url,
-    required this.favicon,
+    this.favicon,
   });
 
   static Source fromJson(Map<String, dynamic> json) {
