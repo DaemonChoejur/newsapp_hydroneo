@@ -8,7 +8,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:news_app_hydroneo/api/new_image_url_api.dart';
+import 'package:news_app_hydroneo/api/news_image_url_api.dart';
 import 'package:news_app_hydroneo/api/news_api.dart';
 import 'package:news_app_hydroneo/constants.dart';
 import 'package:news_app_hydroneo/models/article.dart';
