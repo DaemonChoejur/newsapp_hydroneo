@@ -1,3 +1,9 @@
+/*
+Author: AlphaNapster
+Email: choejur@hotmail.com
+2022
+*/
+
 // We dont really need this data class for now
 class Source {
   String title;

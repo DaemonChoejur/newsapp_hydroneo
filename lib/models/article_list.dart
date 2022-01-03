@@ -1,3 +1,9 @@
+/*
+Author: AlphaNapster
+Email: choejur@hotmail.com
+2022
+*/
+
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:news_app_hydroneo/models/article.dart';

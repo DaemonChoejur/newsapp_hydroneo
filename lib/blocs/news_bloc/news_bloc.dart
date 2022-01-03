@@ -1,3 +1,9 @@
+/*
+Author: AlphaNapster
+Email: choejur@hotmail.com
+2022
+*/
+
 import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';

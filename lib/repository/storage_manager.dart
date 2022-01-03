@@ -1,3 +1,9 @@
+/*
+Author: AlphaNapster
+Email: choejur@hotmail.com
+2022
+*/
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

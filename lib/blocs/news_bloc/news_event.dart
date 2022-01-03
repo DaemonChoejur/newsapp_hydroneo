@@ -1,3 +1,9 @@
+/*
+Author: AlphaNapster
+Email: choejur@hotmail.com
+2022
+*/
+
 part of 'news_bloc.dart';
 
 @immutable

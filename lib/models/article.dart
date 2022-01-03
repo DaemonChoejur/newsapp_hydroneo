@@ -1,4 +1,10 @@
 /*
+Author: AlphaNapster
+Email: choejur@hotmail.com
+2022
+*/
+
+/*
  {
   "published_date": "2022-01-01T05:26:47+00:00",
   "title": "Pictures of the world ushering in 2022, as omicron weighs on New Year celebrations - CNBC",

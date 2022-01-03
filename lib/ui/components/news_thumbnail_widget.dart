@@ -1,3 +1,8 @@
+/*
+Author: AlphaNapster
+Email: choejur@hotmail.com
+2022
+*/
 import 'package:flutter/material.dart';
 import 'package:news_app_hydroneo/ui/components/thumbnail_widget.dart';
 

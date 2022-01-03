@@ -1,10 +1,14 @@
-// This is just a unwanted step
-// the current basic plan of Google News API does not return a thumbnail image for the article
-// Therefore, this call will fetch the url provided from the Google News API and get the <img> tag so that the link to the image can be obtained
+/*
+Author: AlphaNapster
+Email: choejur@hotmail.com
+2022
 
-import 'dart:io';
-
-import 'package:flutter/material.dart';
+This is just a unwanted step
+The current basic plan of Google News API does not return a thumbnail image for the article
+Therefore, this call will fetch the url provided from the Google News API and get the <img> tag so that the link to the image can be obtained
+Article thumbnail is a big part of the App UI, so this will suffice as a demo
+In reality, the the API would provide the thumbnail and this class is basically useless.
+*/
 import 'package:http/http.dart' as http;
 import 'package:news_app_hydroneo/models/article.dart';
 
