@@ -12,13 +12,18 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'components/news_thumbnail_widget.dart';
 
-class FavouriteNewsList extends StatelessWidget {
+class FavouriteNewsList extends StatefulWidget {
   const FavouriteNewsList({Key? key}) : super(key: key);
 
+  @override
+  State<FavouriteNewsList> createState() => _FavouriteNewsListState();
+}
+
+class _FavouriteNewsListState extends State<FavouriteNewsList> {
   String _convertTime(String date) {
     DateTime dt = DateTime.parse(date);
     String _formattedDate =
-        DateFormat("EEEE, d MMMM yyyy, HH:mm:ss").format(dt);
+        DateFormat("EEEE, d MMMM yyyy\nHH:mm:ss").format(dt);
     return _formattedDate;
   }
 
@@ -51,9 +56,9 @@ class FavouriteNewsList extends StatelessWidget {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 12.0),
+            padding: const EdgeInsets.only(right: 15.0),
             child: CircleAvatar(
-              radius: 16.0,
+              radius: 14.0,
               backgroundColor: Colors.blue,
               child: Text(
                 box.values.length.toString(),
@@ -70,7 +75,7 @@ class FavouriteNewsList extends StatelessWidget {
       body: ValueListenableBuilder(
           valueListenable: Boxes.getArticles().listenable(),
           builder: (context, Box box, _) {
-            final articles = box.values.toList().cast<Article>();
+            List<Article> articles = box.values.toList().cast<Article>();
             return articles.isEmpty
                 ? Center(
                     child: Container(
@@ -102,7 +107,7 @@ class FavouriteNewsList extends StatelessWidget {
                                   padding: const EdgeInsets.all(10.0),
                                   child: Row(
                                     children: [
-                                      Flexible(
+                                      Expanded(
                                         flex: 2,
                                         child: NewsThumbnailWidget(
                                             thumbnail: articles[index]
@@ -117,7 +122,7 @@ class FavouriteNewsList extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Expanded(
-                                              flex: 8,
+                                              flex: 6,
                                               child: Text(
                                                 articles[index].title,
                                                 textAlign: TextAlign.left,
@@ -134,7 +139,7 @@ class FavouriteNewsList extends StatelessWidget {
                                                     ),
                                               ),
                                             ),
-                                            const SizedBox(height: 10),
+                                            // const SizedBox(height: 10),
                                             Flexible(
                                               flex: 2,
                                               child: Align(
@@ -142,25 +147,31 @@ class FavouriteNewsList extends StatelessWidget {
                                                 child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
                                                   children: [
                                                     const Icon(
                                                       Icons.access_time_rounded,
                                                       color: Colors.blue,
-                                                      size: 22,
+                                                      size: 24,
                                                     ),
-                                                    const SizedBox(width: 5),
-                                                    Text(
-                                                      _convertTime(
-                                                          articles[index]
-                                                              .publishedDate),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .caption!
-                                                          .copyWith(
-                                                            fontSize: 14,
-                                                          ),
+                                                    const SizedBox(width: 10),
+                                                    // Spacer(flex: 1),
+                                                    FittedBox(
+                                                      fit: BoxFit.fitWidth,
+                                                      child: Text(
+                                                        _convertTime(
+                                                            articles[index]
+                                                                .publishedDate),
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .caption!
+                                                            .copyWith(
+                                                                // fontSize: 13,
+                                                                ),
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -183,3 +194,24 @@ class FavouriteNewsList extends StatelessWidget {
     );
   }
 }
+
+// Dissmissable
+// key: Key(articles[index].publishedDate),
+//                             // Provide a function that tells the app
+//                             // what to do after an item has been swiped away.
+
+//                             onDismissed: (direction) {
+//                               // remove from hive first
+//                               box.delete(articles[index].publishedDate);
+//                               // Remove the item from the data source.
+//                               setState(() {
+//                                 articles.removeAt(index);
+//                               });
+
+//                               // Then show a snackbar.
+//                               ScaffoldMessenger.of(context).showSnackBar(
+//                                 const SnackBar(
+//                                   content: Text('Article removed'),
+//                                 ),
+//                               );
+//                             },

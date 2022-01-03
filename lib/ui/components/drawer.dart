@@ -43,7 +43,7 @@ class _NavDrawerState extends State<NavDrawer> {
         const DrawerHeader(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/newsbg.jpg'),
+              image: AssetImage('assets/images/newsbg.jpeg'),
               fit: BoxFit.cover,
             ),
           ),
@@ -55,8 +55,9 @@ class _NavDrawerState extends State<NavDrawer> {
                 fontWeight: FontWeight.w500,
                 shadows: [
                   Shadow(
-                    blurRadius: 20.0,
-                    offset: Offset(0.0, 6.0),
+                    blurRadius: 30.0,
+                    color: Colors.black,
+                    offset: Offset(2.0, 6.0),
                   )
                 ],
                 color: Colors.white,
@@ -156,7 +157,8 @@ class _NavDrawerState extends State<NavDrawer> {
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 15.0),
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewPadding.bottom + 10.0),
               child: RichText(
                 textScaleFactor: 1.1,
                 text: TextSpan(

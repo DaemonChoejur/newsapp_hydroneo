@@ -34,6 +34,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+
     // _animationController = AnimationController(
     //   vsync: this,
     //   duration: const Duration(milliseconds: 450),
@@ -85,49 +86,51 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       }
       if (state is NewsError) {
         debugPrint(state.error);
-        return Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              state.error,
-              maxLines: 3,
-            ),
-            const SizedBox(height: 20),
-            Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25.0),
-                  color: Colors.blue,
-                  boxShadow: const [
-                    BoxShadow(
-                      blurRadius: 30,
-                      blurStyle: BlurStyle.solid,
-                      color: Colors.blue,
-                    ),
-                  ]),
-              child: Center(
-                child: IconButton(
-                  alignment: Alignment.center,
-                  onPressed: () {
-                    // allow manual refresh
-                    // TODO refresh
-                    context.read<NewsBloc>().add(
-                          FetchNews(topic: TOPICS.world.name),
-                        );
-                  },
-                  icon: const Icon(
-                    Icons.refresh,
-                    size: 28,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            )
-          ],
-        ));
+        // return MaterialApp(
+        //   home: Center(
+        //       child: Column(
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     crossAxisAlignment: CrossAxisAlignment.center,
+        //     children: [
+        //       Text(
+        //         state.error,
+        //         maxLines: 3,
+        //       ),
+        //       const SizedBox(height: 20),
+        //       Container(
+        //         width: 50,
+        //         height: 50,
+        //         decoration: BoxDecoration(
+        //             borderRadius: BorderRadius.circular(25.0),
+        //             color: Colors.blue,
+        //             boxShadow: const [
+        //               BoxShadow(
+        //                 blurRadius: 30,
+        //                 blurStyle: BlurStyle.solid,
+        //                 color: Colors.blue,
+        //               ),
+        //             ]),
+        //         child: Center(
+        //           child: IconButton(
+        //             alignment: Alignment.center,
+        //             onPressed: () {
+        //               // allow manual refresh
+        //               // TODO refresh
+        //               // context.read<NewsBloc>().add(
+        //               //       FetchNews(topic: TOPICS.world.name),
+        //               //     );
+        //             },
+        //             icon: const Icon(
+        //               Icons.refresh,
+        //               size: 28,
+        //               color: Colors.white,
+        //             ),
+        //           ),
+        //         ),
+        //       )
+        //     ],
+        //   )),
+        // );
       }
       if (state is NewsLoaded) {
         return Scaffold(
@@ -136,6 +139,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           appBar: AppBar(
             centerTitle: true,
             elevation: 0,
+            systemOverlayStyle: const SystemUiOverlayStyle(
+                // statusBarColor: Colors.white,
+                statusBarBrightness: Brightness.dark),
             backgroundColor: Colors.transparent,
             title: InkWell(
               onTap: () {

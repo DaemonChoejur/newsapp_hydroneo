@@ -13,7 +13,7 @@ class ThemeNotifier with ChangeNotifier {
   final darkTheme = ThemeData(
     fontFamily: 'Proxima Nova',
     appBarTheme: const AppBarTheme(
-      systemOverlayStyle: SystemUiOverlayStyle.dark,
+      systemOverlayStyle: SystemUiOverlayStyle.light,
     ),
     brightness: Brightness.dark,
   );
@@ -22,7 +22,7 @@ class ThemeNotifier with ChangeNotifier {
   final lightTheme = ThemeData(
     fontFamily: 'Proxima Nova',
     appBarTheme: const AppBarTheme(
-      systemOverlayStyle: SystemUiOverlayStyle.light,
+      systemOverlayStyle: SystemUiOverlayStyle.dark,
     ),
     brightness: Brightness.light,
   );

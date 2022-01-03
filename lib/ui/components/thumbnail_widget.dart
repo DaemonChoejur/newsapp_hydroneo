@@ -14,25 +14,24 @@ class ThumbnailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return thumbnail.contains('http')
-        ? CachedNetworkImage(
-            imageUrl: thumbnail,
-            imageBuilder: (context, imageProvider) => Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                image: DecorationImage(
-                  image: imageProvider,
-                  fit: BoxFit.cover,
+        ? Center(
+            child: CachedNetworkImage(
+              imageUrl: thumbnail,
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
+              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                  CircularProgressIndicator(value: downloadProgress.progress),
+              fadeInDuration: const Duration(seconds: 1),
+              fadeOutDuration: const Duration(seconds: 3),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
-            progressIndicatorBuilder: (context, url, progress) {
-              return CircularProgressIndicator(
-                value: progress.downloaded.toDouble(),
-              );
-            },
-            fadeInDuration: const Duration(seconds: 1),
-            fadeOutDuration: const Duration(seconds: 3),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
           )
         : Container(
             decoration: BoxDecoration(
