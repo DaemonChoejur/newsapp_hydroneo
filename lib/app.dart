@@ -6,27 +6,50 @@ import 'package:news_app_hydroneo/api/news_api.dart';
 import 'package:news_app_hydroneo/blocs/news_bloc/news_bloc.dart';
 import 'package:news_app_hydroneo/common/theme.dart';
 import 'package:news_app_hydroneo/models/article_list.dart';
+import 'package:news_app_hydroneo/notifiers/article_notifier.dart';
+import 'package:news_app_hydroneo/notifiers/topics_notifier.dart';
 import 'package:news_app_hydroneo/repository/hive_repository.dart';
 import 'package:news_app_hydroneo/ui/home.dart';
 import 'package:provider/provider.dart';
 
 class ENewsApp extends StatelessWidget {
   final Box cachedBox;
-  const ENewsApp({Key? key, required this.cachedBox}) : super(key: key);
+  final Box favourtiesBox;
+  ENewsApp({Key? key, required this.cachedBox, required this.favourtiesBox})
+      : super(key: key);
+
+  final BaseOptions options =
+      BaseOptions(receiveTimeout: 5000, connectTimeout: 5000);
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ThemeNotifier>(
-      create: (_) => ThemeNotifier(),
+    // change notifiers theme and topic notifier provided here
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ThemeNotifier>(
+          create: (_) => ThemeNotifier(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => TopicsNotifier(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ArticleNotifier(),
+        )
+      ],
       child: Consumer<ThemeNotifier>(
         builder: (context, theme, _) {
-          return BlocProvider(
-            create: (_) => NewsBloc(
-              newsApiClient: NewsApiClient(
-                dio: Dio(),
+          return MultiBlocProvider(
+            providers: [
+              // provide bloc for news bloc
+              BlocProvider(
+                create: (_) => NewsBloc(
+                  newsApiClient: NewsApiClient(
+                    dio: Dio(options),
+                  ),
+                  cached: HiveRepository<ArticlesList>(cachedBox),
+                ),
               ),
-              cached: HiveRepository<ArticlesList>(cachedBox),
-            ),
+            ],
             child: MaterialApp(
               theme: theme.getTheme(),
               debugShowCheckedModeBanner: false,

@@ -4,10 +4,10 @@ part of 'news_bloc.dart';
 abstract class NewsEvent {}
 
 class FetchNews extends NewsEvent {
-  final TOPICS topic;
-  final int limit;
+  final String topic;
+  // final int limit;
 
-  FetchNews({required this.topic, required this.limit});
+  FetchNews({required this.topic});
 }
 
 class FetchCachedNextNewsArticle extends NewsEvent {

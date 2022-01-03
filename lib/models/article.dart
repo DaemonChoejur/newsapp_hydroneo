@@ -22,7 +22,7 @@ class Article extends HiveObject {
   @HiveField(1)
   String publishedDate;
   @HiveField(2)
-  String? description;
+  String? id;
   @HiveField(3)
   String title;
   @HiveField(4)
@@ -32,15 +32,15 @@ class Article extends HiveObject {
     // required this.source,
     required this.link,
     required this.publishedDate,
-    this.description,
+    this.id,
     required this.title,
     this.thumbnail,
   });
 
   static Article fromJson(Map<String, dynamic> json) {
-    String description = '';
+    // String description = '';
     String thumbnail = '';
-    if (json['description'] != null) description = json['description'];
+    // if (json['description'] != null) description = json['description'];
     if (json['thumbnail'] != null) {
       thumbnail = json['thumbnail'];
     }
@@ -50,8 +50,13 @@ class Article extends HiveObject {
       link: json['link'],
       publishedDate: json['published_date'],
       title: json['title'],
-      description: description,
+      // description: description,
       thumbnail: thumbnail,
     );
+  }
+
+  void updateThumbnail(String link) {
+    thumbnail = link;
+    print(thumbnail);
   }
 }

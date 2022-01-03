@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +6,6 @@ import 'package:news_app_hydroneo/blocs/news_bloc/news_bloc.dart';
 import 'package:news_app_hydroneo/models/article.dart';
 import 'package:news_app_hydroneo/ui/components/news_thumbnail_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:sensors_plus/sensors_plus.dart';
 
 class NewsWidget extends StatefulWidget {
   final Article article;
@@ -19,13 +17,13 @@ class NewsWidget extends StatefulWidget {
 
 class _NewsWidgetState extends State<NewsWidget>
     with SingleTickerProviderStateMixin {
-  List<double>? _accelerometerValues;
-  final _streamSubscriptions = <StreamSubscription<dynamic>>[];
+  // List<double>? _accelerometerValues;
+  // final _streamSubscriptions = <StreamSubscription<dynamic>>[];
 
   late final AnimationController _controller;
   double _scale = 0.0;
 
-  int bgMotionSensitivity = 2;
+  // int bgMotionSensitivity = 2;
 
   @override
   void initState() {
@@ -33,7 +31,7 @@ class _NewsWidgetState extends State<NewsWidget>
     // initialize animation controller
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 200),
       lowerBound: 0.0,
       upperBound: 0.1,
     )..addListener(() {
@@ -41,23 +39,23 @@ class _NewsWidgetState extends State<NewsWidget>
       });
 
     // listen to stream
-    _streamSubscriptions.add(
-      accelerometerEvents.listen(
-        (AccelerometerEvent event) {
-          setState(() {
-            _accelerometerValues = <double>[event.x, event.y, event.z];
-          });
-        },
-      ),
-    );
+    // _streamSubscriptions.add(
+    //   accelerometerEvents.listen(
+    //     (AccelerometerEvent event) {
+    //       setState(() {
+    //         _accelerometerValues = <double>[event.x, event.y, event.z];
+    //       });
+    //     },
+    //   ),
+    // );
   }
 
   @override
   void dispose() {
     super.dispose();
-    for (final subscription in _streamSubscriptions) {
-      subscription.cancel();
-    }
+    // for (final subscription in _streamSubscriptions) {
+    //   subscription.cancel();
+    // }
     _controller.dispose();
   }
 
@@ -80,18 +78,21 @@ class _NewsWidgetState extends State<NewsWidget>
 
   @override
   Widget build(BuildContext context) {
-    // 1 - _ctonroller.value since the initial value of controller = 0.0
+    // print(widget.article.link);
+
+    // 1 - _controller.value since the initial value of controller = 0.0
     // Transform uses the scale so setting _scale = _controller.value initially will be _scale = 0.0 rather we want the scale to be 1 at initial
     _scale = 1 - _controller.value;
 
-    final accelerometer =
-        _accelerometerValues?.map((double v) => v.toStringAsFixed(1));
-    // if (accelerometer != null) {
-    //   debugPrint(accelerometer.toString());
-    // }
+    // final accelerometer =
+    //     _accelerometerValues?.map((double v) => v.toStringAsFixed(1));
+
+    // 2021-07-22T01:15:00+00:00 - date format received from api
+    // format the date and time
     DateTime dt = DateTime.parse(widget.article.publishedDate);
     String _formattedDate =
         DateFormat("EEEE, d MMMM yyyy\nHH:mm:ss").format(dt);
+    // keep track of current article being displayed to user
     return Stack(
       children: [
         Positioned(
@@ -123,21 +124,21 @@ class _NewsWidgetState extends State<NewsWidget>
                 ),
               ),
               const SizedBox(height: 20),
-              widget.article.description != null
-                  ? Container(
-                      child: Text(
-                        widget.article.description!,
-                        style: TextStyle(
-                          height: 1.5,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w100,
-                          color: Colors.white.withOpacity(0.85),
-                        ),
-                      ),
-                    )
-                  : Container(),
-              const SizedBox(height: 10),
-              Container(
+              // widget.article.description != null
+              //     ? SizedBox(
+              //         child: Text(
+              //           widget.article.description!,
+              //           style: TextStyle(
+              //             height: 1.5,
+              //             fontSize: 15,
+              //             fontWeight: FontWeight.w100,
+              //             color: Colors.white.withOpacity(0.85),
+              //           ),
+              //         ),
+              //       )
+              //     : const SizedBox(),
+              // const SizedBox(height: 10),
+              SizedBox(
                 // color: Colors.red,
                 width: MediaQuery.of(context).size.width,
                 child: Padding(

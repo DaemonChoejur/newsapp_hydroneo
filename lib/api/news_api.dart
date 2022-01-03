@@ -28,7 +28,7 @@ class NewsApiClient {
 
   Future<ArticlesList> fetchNews({
     required String topic,
-    required int limit,
+    int limit = 10,
   }) async {
     final _query = {
       'topic': topic,
@@ -51,6 +51,9 @@ class NewsApiClient {
 
     if (response.statusCode != 200) {
       throw Exception('error getting news from $_baseURL');
+    } else if (response.statusCode == 429) {
+      // print("API RATE LIMIMT EEXCEEDED");
+      throw Exception('too many request');
     }
 
     final json = response.data;

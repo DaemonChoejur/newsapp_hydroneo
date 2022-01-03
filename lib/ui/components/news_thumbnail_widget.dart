@@ -1,5 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app_hydroneo/ui/components/thumbnail_widget.dart';
 
 class NewsThumbnailWidget extends StatelessWidget {
   final String thumbnail;
@@ -8,21 +8,36 @@ class NewsThumbnailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
-      imageUrl: thumbnail.contains('https://')
-          ? thumbnail
-          : 'https://nypost.com/wp-content/uploads/sites/2/2021/07/jim-banks-914.jpg?quality=80&strip=all&w=1200',
-      imageBuilder: (context, imageProvider) => Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: imageProvider,
-            fit: BoxFit.cover,
-          ),
+    return Stack(
+      children: [
+        ThumbnailWidget(
+          thumbnail: thumbnail,
         ),
-      ),
-      fadeInDuration: const Duration(seconds: 1),
-      fadeOutDuration: const Duration(seconds: 3),
-      errorWidget: (context, url, error) => const Icon(Icons.error),
+        thumbnail.contains('https://')
+            ? const SizedBox()
+            : Positioned.fill(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black38,
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: const Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
+                      child: Text(
+                        'Default image from assets.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+      ],
     );
   }
 }

@@ -19,7 +19,7 @@ class ArticleAdapter extends TypeAdapter<Article> {
     return Article(
       link: fields[0] as String,
       publishedDate: fields[1] as String,
-      description: fields[2] as String?,
+      id: fields[2] as String?,
       title: fields[3] as String,
       thumbnail: fields[4] as String?,
     );
@@ -34,7 +34,7 @@ class ArticleAdapter extends TypeAdapter<Article> {
       ..writeByte(1)
       ..write(obj.publishedDate)
       ..writeByte(2)
-      ..write(obj.description)
+      ..write(obj.id)
       ..writeByte(3)
       ..write(obj.title)
       ..writeByte(4)

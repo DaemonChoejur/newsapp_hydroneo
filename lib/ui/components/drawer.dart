@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -100,32 +98,35 @@ class _NavDrawerState extends State<NavDrawer> {
               }
             }),
         const Divider(),
-        ListTile(
-          // leading: const Icon(Icons.input),
-          title: const Text(
-            'Favourites',
-            textScaleFactor: 1.07,
-          ),
-          subtitle: const Text('Your favourite news list.'),
-          trailing: const Text(
-            '20',
-            textScaleFactor: 1.07,
-          ),
-          onTap: () => {},
-        ),
-        const Divider(),
-        const ListTile(
-          // leading: const Icon(Icons.input),
-          title: Text(
-            'Api calls remaining',
-            textScaleFactor: 1.07,
-          ),
-          // subtitle:  Text(''),
-          trailing: Text(
-            '20',
-            textScaleFactor: 1.07,
-          ),
-        ),
+        // using dynamic height value + a constant height factor
+        SizedBox(height: MediaQuery.of(context).size.height * 0.02 + 20),
+        // const Spacer(flex: 1),
+        // ListTile(
+        //   // leading: const Icon(Icons.input),
+        //   title: const Text(
+        //     'Favourites',
+        //     textScaleFactor: 1.07,
+        //   ),
+        //   subtitle: const Text('Your favourite news list.'),
+        //   trailing: const Text(
+        //     '20',
+        //     textScaleFactor: 1.07,
+        //   ),
+        //   onTap: () => {},
+        // ),
+        // const Divider(),
+        // const ListTile(
+        //   // leading: const Icon(Icons.input),
+        //   title: Text(
+        //     'Api calls remaining',
+        //     textScaleFactor: 1.07,
+        //   ),
+        //   // subtitle:  Text(''),
+        //   trailing: Text(
+        //     '20',
+        //     textScaleFactor: 1.07,
+        //   ),
+        // ),
         Center(
             child: Column(
           children: [

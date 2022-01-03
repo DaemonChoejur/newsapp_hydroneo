@@ -18,6 +18,7 @@ class HiveRepository<T> implements IRepository<T> {
 
   @override
   Future<void> add(T object) async {
+    // await _box.clear();
     if (boxIsClosed) {
       return;
     }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:news_app_hydroneo/models/article.dart';
 part 'article_list.g.dart';
@@ -5,11 +6,11 @@ part 'article_list.g.dart';
 @HiveType(typeId: 0)
 class ArticlesList extends HiveObject {
   @HiveField(0)
-  int statusCode;
+  int? statusCode;
   @HiveField(1)
   List<Article> articlesList;
 
-  ArticlesList({required this.statusCode, required this.articlesList});
+  ArticlesList({this.statusCode, required this.articlesList});
 
   static ArticlesList fromJson(Map<String, dynamic> json) {
     List<Article> articles = [];
@@ -22,5 +23,11 @@ class ArticlesList extends HiveObject {
       statusCode: json['statusCode'],
       articlesList: articles,
     );
+  }
+
+  // custom function - update thumbnail url
+  void updateThumbnail(int index, String url) {
+    articlesList[index].updateThumbnail(url);
+    debugPrint("got url $url, updated!!");
   }
 }
