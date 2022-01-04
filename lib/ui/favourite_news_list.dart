@@ -39,7 +39,6 @@ class _FavouriteNewsListState extends State<FavouriteNewsList> {
 
   @override
   Widget build(BuildContext context) {
-    final box = Boxes.getArticles();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -50,7 +49,7 @@ class _FavouriteNewsListState extends State<FavouriteNewsList> {
           ),
         ),
         leading: IconButton(
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.pop(context, true),
           icon: Icon(
             Icons.arrow_back_ios_new,
             color: Theme.of(context).iconTheme.color,
@@ -58,12 +57,11 @@ class _FavouriteNewsListState extends State<FavouriteNewsList> {
         ),
         actions: [
           InkWell(
-            onTap: () {
+            onTap: () async {
               // clear the list
               HapticFeedback.mediumImpact();
               var box = Boxes.getArticles();
               box.clear();
-              setState(() {});
               // _render
             },
             child: Container(
@@ -90,13 +88,17 @@ class _FavouriteNewsListState extends State<FavouriteNewsList> {
             icon: CircleAvatar(
               radius: 14.0,
               backgroundColor: Colors.blue,
-              child: Text(
-                box.values.length.toString(),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 13.8,
-                ),
-              ),
+              child: ValueListenableBuilder(
+                  valueListenable: Boxes.getArticles().listenable(),
+                  builder: (context, Box box, _) {
+                    return Text(
+                      box.values.length.toString(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 13.8,
+                      ),
+                    );
+                  }),
             ),
           ),
         ],

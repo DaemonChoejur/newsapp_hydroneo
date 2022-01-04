@@ -78,7 +78,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   _renderSnackBar(String text) {
     return SnackBar(
-      duration: const Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 500),
       behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
@@ -178,8 +178,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ),
           ),
           BlocListener<NewsBloc, NewsState>(
-            // stream: null,
             listener: (context, state) {
+              // setState(() {});
               if (state is NewsLoaded) {
                 final article = Boxes.getArticles();
                 setState(() {
