@@ -39,6 +39,8 @@ class _FavouriteNewsListState extends State<FavouriteNewsList> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO search bar to search within hive
+    // TODO categorize articles based on tops with collapseable lists
     final box = Boxes.getArticles();
     return Scaffold(
       appBar: AppBar(
