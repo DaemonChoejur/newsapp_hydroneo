@@ -31,20 +31,12 @@ flutter pub get
 ```
 
 Step 3:
-This project uses flutter_dotenv package which requires you to create an .env file
+This project uses flutter_dotenv package which requires you to create an .env file.
 Create a .env file and place it in your assets folder.
 Contents of the .env file are as follows:
 
 ```
 API_KEY = [YOUR_API_KEY_HERE]
-DEV_API_KEY = [YOUR_API_KEY_HERE]
-```
-
-I have used 2 API keys in the news_api.dart file found in api folder under lib.
-Checking where its running on release more or not since the API key has a hard rate limit
-
-```
-kReleaseMode ? dotenv.get('API_KEY') : dotenv.get('DEV_API_KEY2')
 ```
 
 ---

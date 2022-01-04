@@ -45,8 +45,7 @@ class NewsApiClient {
 
     Map<String, String> _headers = {
       'x-rapidapi-host': 'google-news1.p.rapidapi.com',
-      'x-rapidapi-key':
-          kReleaseMode ? dotenv.get('API_KEY') : dotenv.get('DEV_API_KEY2'),
+      'x-rapidapi-key': dotenv.get('API_KEY'),
     };
 
     final response = await dio.get(
