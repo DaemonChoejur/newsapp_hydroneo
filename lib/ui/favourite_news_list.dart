@@ -4,6 +4,7 @@ Email: choejur@hotmail.com
 2022
 */
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app_hydroneo/models/article.dart';
@@ -41,6 +42,7 @@ class _FavouriteNewsListState extends State<FavouriteNewsList> {
     final box = Boxes.getArticles();
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           'Favourties',
           style: TextStyle(
@@ -55,19 +57,48 @@ class _FavouriteNewsListState extends State<FavouriteNewsList> {
           ),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 15.0),
-            child: CircleAvatar(
+          InkWell(
+            onTap: () {
+              // clear the list
+              HapticFeedback.mediumImpact();
+              var box = Boxes.getArticles();
+              box.clear();
+              setState(() {});
+              // _render
+            },
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 14.0),
+              width: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: Colors.red,
+              ),
+              // height: 10,
+              child: const Center(
+                child: Text(
+                  'Clear',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      // fontSize: 13,
+                      ),
+                ),
+              ),
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: CircleAvatar(
               radius: 14.0,
               backgroundColor: Colors.blue,
               child: Text(
                 box.values.length.toString(),
                 style: const TextStyle(
                   color: Colors.white,
+                  fontSize: 13.8,
                 ),
               ),
             ),
-          )
+          ),
         ],
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -77,9 +108,9 @@ class _FavouriteNewsListState extends State<FavouriteNewsList> {
           builder: (context, Box box, _) {
             List<Article> articles = box.values.toList().cast<Article>();
             return articles.isEmpty
-                ? Center(
-                    child: Container(
-                      child: const Text(
+                ? const Center(
+                    child: SizedBox(
+                      child: Text(
                         'No favourties added',
                         style: TextStyle(
                           fontSize: 17,

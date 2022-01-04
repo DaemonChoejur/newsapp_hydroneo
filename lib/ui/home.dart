@@ -78,7 +78,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   _renderSnackBar(String text) {
     return SnackBar(
-      duration: const Duration(seconds: 1),
+      duration: const Duration(milliseconds: 600),
       behavior: SnackBarBehavior.floating,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
@@ -271,48 +271,58 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         // }
         if (state is NewsError) {
           debugPrint(state.error);
-          return Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                state.error,
-                maxLines: 3,
-              ),
-              const SizedBox(height: 20),
-              Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25.0),
-                    color: Colors.blue,
-                    boxShadow: const [
-                      BoxShadow(
-                        blurRadius: 30,
-                        blurStyle: BlurStyle.solid,
-                        color: Colors.blue,
+          return Container(
+            color: Colors.black26,
+            child: Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25.0),
+                      color: Colors.blue,
+                      boxShadow: const [
+                        BoxShadow(
+                          blurRadius: 30,
+                          blurStyle: BlurStyle.solid,
+                          color: Colors.blue,
+                        ),
+                      ]),
+                  child: Center(
+                    child: IconButton(
+                      alignment: Alignment.center,
+                      onPressed: () {
+                        // TODO refresh
+                        context
+                            .read<NewsBloc>()
+                            .add(FetchNews(topic: TOPICS.world.name));
+                      },
+                      icon: const Icon(
+                        Icons.refresh,
+                        size: 28,
+                        color: Colors.white,
                       ),
-                    ]),
-                child: Center(
-                  child: IconButton(
-                    alignment: Alignment.center,
-                    onPressed: () {
-                      // TODO refresh
-                      // context
-                      //     .read<NewsBloc>()
-                      //     .add(FetchNews(topic: TOPICS.world, limit: 10));
-                    },
-                    icon: const Icon(
-                      Icons.refresh,
-                      size: 28,
-                      color: Colors.white,
                     ),
                   ),
                 ),
-              )
-            ],
-          ));
+                SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.02 + 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  child: Text(
+                    state.error,
+                    maxLines: 4,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+              ],
+            )),
+          );
         }
         return const Center(
           child: CircularProgressIndicator(),

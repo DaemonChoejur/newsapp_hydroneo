@@ -98,7 +98,14 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
             if (e is DioError) {
               // print(e.response!.statusCode);
               emit(NewsErrorApiLimitExceeded());
-              emit(NewsLoaded(article: _cachedList.articlesList[counter]));
+
+              // load cached if cachedList is not empty
+              if (_cachedList.articlesList.isNotEmpty) {
+                emit(NewsLoaded(article: _cachedList.articlesList[counter]));
+              } else {
+                emit(
+                    NewsError(error: 'API limit exceeded. No news for now 🥺'));
+              }
             } else {
               emit(
                 NewsError(error: 'Oops something went wrong'),
