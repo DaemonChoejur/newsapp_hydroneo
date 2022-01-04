@@ -31,6 +31,8 @@ dependencies:
   hive_flutter: ^1.1.0
   sensors_plus: ^1.2.1
   http: ^0.13.4
+  bloc_test: ^9.0.2
+  mockito: ^5.0.17
 
 dev_dependencies:
   flutter_test:

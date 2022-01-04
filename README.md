@@ -62,6 +62,8 @@ kReleaseMode ? dotenv.get('API_KEY') : dotenv.get('DEV_API_KEY2')
 - [Pretty Dio Logger](https://pub.dev/packages/pretty_dio_logger)
 - [Hive](https://pub.dev/packages/hive)
 - [Cached Network Image](https://pub.dev/packages/cached_network_image)
+- [Bloc Test](https://pub.dev/packages/bloc_test)
+- [Mockito](https://pub.dev/packages/mockito)
 
 # Folder Structure
 
@@ -186,4 +188,6 @@ ui/components
 
 Thank you for taking the time to go through my project.
 
-# © AlphaNapster 2022
+---
+
+# <p align="center"> © AlphaNapster 2022</p>

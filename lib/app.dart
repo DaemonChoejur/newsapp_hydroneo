@@ -49,11 +49,12 @@ class ENewsApp extends StatelessWidget {
               // provide bloc for news bloc
               BlocProvider(
                 create: (_) => NewsBloc(
-                  newsApiClient: NewsApiClient(
-                    dio: Dio(options),
-                  ),
-                  cached: HiveRepository<ArticlesList>(cachedBox),
-                ),
+                    newsApiClient: NewsApiClient(
+                      dio: Dio(options),
+                    ),
+                    cached: HiveRepository<ArticlesList>(cachedBox),
+                    currentTopic:
+                        Provider.of<TopicsNotifier>(context).currentTopic),
               ),
             ],
             child: MaterialApp(

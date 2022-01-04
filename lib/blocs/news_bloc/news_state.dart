@@ -17,6 +17,8 @@ class NewsError extends NewsState {
   NewsError({required this.error});
 }
 
+class NewsErrorApiLimitExceeded extends NewsState {}
+
 class NewsLoaded extends NewsState {
   // final ArticlesList articlesList;
   final Article article;

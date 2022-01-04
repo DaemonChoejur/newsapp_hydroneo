@@ -29,7 +29,7 @@ Future main() async {
 
   // open box for hive
   // getting name from enum of TOPICS located at constants.dart
-  Box cachedBox = await Hive.openBox<ArticlesList>(TOPICS.world.name);
+  Box cachedBox = await Hive.openBox<ArticlesList>(kNewsBox);
   Box favourtiesBox = await Hive.openBox<Article>(kFavouriteBox);
 
   // await favourtiesBox.clear();

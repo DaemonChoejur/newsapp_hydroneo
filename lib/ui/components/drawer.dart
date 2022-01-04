@@ -23,7 +23,7 @@ class _NavDrawerState extends State<NavDrawer> {
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    String formattedDate = DateFormat('EEEE\nMMMM d').format(now);
+    String formattedDate = DateFormat('EEEE,\nMMMM d').format(now);
 
     // we need to know if the current mode is darkmode or not so we can set the value of the cupertino switch accurately.
     var theme = Provider.of<ThemeNotifier>(context).isDarkMode;
@@ -65,6 +65,7 @@ class _NavDrawerState extends State<NavDrawer> {
             ),
           ),
         ),
+
         ListTile(
           title: Text(
             formattedDate.toString(),
@@ -73,6 +74,7 @@ class _NavDrawerState extends State<NavDrawer> {
             ),
           ),
         ),
+        const Divider(),
         ListTile(
           title: const Text(
             'Theme Mode',
@@ -103,36 +105,11 @@ class _NavDrawerState extends State<NavDrawer> {
                     .setDarkMode();
               }
             }),
+        // const Divider(),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.02 + 20),
         const Divider(),
         // using dynamic height value + a constant height factor
-        SizedBox(height: MediaQuery.of(context).size.height * 0.02 + 20),
-        // const Spacer(flex: 1),
-        // ListTile(
-        //   // leading: const Icon(Icons.input),
-        //   title: const Text(
-        //     'Favourites',
-        //     textScaleFactor: 1.07,
-        //   ),
-        //   subtitle: const Text('Your favourite news list.'),
-        //   trailing: const Text(
-        //     '20',
-        //     textScaleFactor: 1.07,
-        //   ),
-        //   onTap: () => {},
-        // ),
-        // const Divider(),
-        // const ListTile(
-        //   // leading: const Icon(Icons.input),
-        //   title: Text(
-        //     'Api calls remaining',
-        //     textScaleFactor: 1.07,
-        //   ),
-        //   // subtitle:  Text(''),
-        //   trailing: Text(
-        //     '20',
-        //     textScaleFactor: 1.07,
-        //   ),
-        // ),
+
         Center(
             child: Column(
           children: [
